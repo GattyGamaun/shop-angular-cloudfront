@@ -1,7 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { ApiService } from '../../core/api.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
+import { logging } from 'protractor';
 
 @Injectable()
 export class ManageProductsService extends ApiService {
@@ -16,13 +17,16 @@ export class ManageProductsService extends ApiService {
       );
       return EMPTY;
     }
-
+    console.log(file);
     return this.getPreSignedUrl(file.name).pipe(
+      tap((url) => console.log(url)),
       switchMap((url) =>
         this.http.put(url, file, {
           headers: {
             // eslint-disable-next-line @typescript-eslint/naming-convention
             'Content-Type': 'text/csv',
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            'Access-Control-Allow-Origin': '*',
           },
         })
       )

@@ -33,7 +33,8 @@ export class ManageProductsComponent implements OnInit {
 
     this.manageProductsService
       .uploadProductsCSV(this.selectedFile)
-      .subscribe(() => {
+      .subscribe((a) => {
+        console.log(a);
         this.selectedFile = null;
         this.cdr.markForCheck();
       });
