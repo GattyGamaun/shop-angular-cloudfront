@@ -23,6 +23,8 @@ export class ManageProductsService extends ApiService {
           headers: {
             // eslint-disable-next-line @typescript-eslint/naming-convention
             'Content-Type': 'text/csv',
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            'Access-Control-Allow-Origin': '*',
           },
         })
       )
